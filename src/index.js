@@ -4,8 +4,12 @@ import App from "./App";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
+import { addCharacterById } from "./actions/actions";
 
 const store = createStore(reducer);
+console.log("store.getState()", store.getState());
+store.subscribe(() => console.log("store", store.getState()));
+store.dispatch(addCharacterById(2));
 
 ReactDOM.render(
   <Provider store={store}>
