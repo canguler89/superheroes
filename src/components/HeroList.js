@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { removeCharById } from "../actions/actions";
+import { bindActionCreators } from "redux";
 
 class HeroList extends Component {
   render() {
@@ -11,6 +13,12 @@ class HeroList extends Component {
             return (
               <li key={hero.id} className="list-group-item">
                 <div className="list-item">{hero.name}</div>
+                <div
+                  className="list-item right-button"
+                  onClick={() => this.props.removeCharById(hero.id)}
+                >
+                  X
+                </div>
               </li>
             );
           })}
@@ -25,4 +33,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(HeroList);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ removeCharById }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeroList);
